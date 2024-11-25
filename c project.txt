@@ -1,0 +1,85 @@
+
+AIM:
+Write a C program to Display a month / annual calender with current date
+heighlighting
+
+#include <stdio.h>
+int getstartingday(int year,int month)
+{
+ if(month<3)
+ {
+ month+=12;
+ year--;
+ }
+ int k=year%100;
+ int j=year/100;
+ int dayofweek=(1+(13*(month+1))/5+k+(k/4)+(j/4)-(2*j))%7;
+ return (dayofweek+6)%7;
+
+}
+int getdaysinmonth(int year,int month)
+Display a month/annual calender with current date
+highlighting
+{
+ if(month==4||month==6||month==9||month==11)
+ {
+ return 30;
+ }else if(month==2)
+ {
+ if((year%4==0&&year%100!=0)||(year%400==0))
+ {
+ return 29;
+ }else {
+ return 28;
+ }
+ }else{
+ return 31;
+ }
+ }
+ void printcalender(int year,int month)
+ {
+ const
+char*months[]={"January","February","March","April","May","June","July","Au
+gest","September","October","November","December"
+ };
+ int daysinmonth=getdaysinmonth(year,month);
+ int startday=getstartingday(year,month);
+ printf("\n %s %d\n",months[month-1],year);
+ printf("SU MO TU WE TH FR SA\n");
+ int currentday=1;
+ for(int i=0;i<startday;i++){
+ printf(" ");
+ }
+for(int i=startday;currentday<=daysinmonth;i++){
+ printf("%2d ",currentday);
+ if(i==6){
+ printf("\n");
+ i=-1;
+ }
+ currentday++;
+}
+if((startday+daysinmonth-1)%7!=6){
+ printf("\n");
+}
+}
+int main()
+{
+int year,month;
+printf("Enter the Year");
+scanf("%d",&year);
+printf("Enter the Month");
+scanf("%d",&month);
+printcalender(year,month);
+return 0;
+}
+OUTPUT :
+Enter the Year2024
+Enter the Month11
+  
+November  2024
+SU  MO  TU  WE  TH  FR  SA
+                                    1     2
+3     4     5     6      7    8     9
+10  11   12   13   14  15  16
+17  18  19   20   21  22  23
+24  25  26  27   28   29  30
